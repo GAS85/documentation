@@ -75,6 +75,37 @@ the ``clamd`` service file and start ``clamd``::
 That should take care of everything. Enable verbose logging in ``scan.conf``
 and ``freshclam.conf`` until it is running the way you want.
 
+Docker
+  To install ClamAV via docker, just pickup one of available packages and expose
+  ``SOCKET`` to the local host via command::
+ 
+   docker run --name clamav -d -v /var/run/clamav/:/var/run/clamav/ path/to/the/image
+ 
+Now you can use ClamAV via Daemon (Socket) configuration.
+
+.. note:: Exact configuration of your ClamAV depends on image that will be used.
+   You have to setup ``LocalSocket`` option in ``clamd.conf``.
+ 
+Docker-Compose
+  To use ClamAV via docker-compose, just pickup one of available packages and expose
+  ``SOCKET`` to the local host:
+ 
+  .. code-block:: yaml
+
+    version: "3.6"
+    services:
+      clamav:
+        image: "path/to/the/image"
+        container_name: "clamav"
+        volumes:
+          - /var/run/clamav/:/var/run/clamav/
+        restart: unless-stopped
+
+Now you can use ClamAV via Daemon (Socket) configuration.
+
+.. note:: Exact configuration of your ClamAV depends on image that will be used.
+   You have to setup ``LocalSocket`` option in ``clamd.conf``.
+
 Enabling the antivirus app for files
 ------------------------------------
 
