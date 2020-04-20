@@ -209,7 +209,9 @@ Enable an app, for example the External Storage Support app::
 
  sudo -u www-data php occ app:enable files_external
  files_external enabled
-   
+
+.. note:: If you force to enable app that max supported version not matching your current Nextcloud installation version via command ``sudo -u www-data php occ app:enable --force files_external``, than ``app_install_overwrite`` parameter will be added to your ``config.php`` file.
+
 Disable an app::
 
  sudo -u www-data php occ app:disable files_external
